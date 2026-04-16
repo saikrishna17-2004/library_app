@@ -1,0 +1,16 @@
+<div class="shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">PromptOps</p>
+      <h1>AI Image Prompt Library</h1>
+    </div>
+    <nav>
+      <a routerLink="/prompts" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">All Prompts</a>
+      <a routerLink="/prompts/new" routerLinkActive="active">Add Prompt</a>
+    </nav>
+  </header>
+
+  <main class="content-card">
+    <router-outlet></router-outlet>
+  </main>
+</div>

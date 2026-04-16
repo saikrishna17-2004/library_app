@@ -1,0 +1,97 @@
+:host {
+	display: block;
+}
+
+.shell {
+	width: min(980px, 94vw);
+	margin: 2.1rem auto;
+	display: grid;
+	gap: 1rem;
+}
+
+.topbar {
+	border: 1px solid #6f8378;
+	border-radius: 16px;
+	background: linear-gradient(130deg, #dce7cf 0%, #c4e6dd 55%, #f6ebcc 100%);
+	padding: 1rem 1.2rem;
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	align-items: end;
+	animation: slideIn 0.45s ease;
+}
+
+.eyebrow {
+	margin: 0;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #345247;
+	font-size: 0.76rem;
+}
+
+h1 {
+	margin: 0.1rem 0 0;
+	font-size: clamp(1.35rem, 3.3vw, 2.3rem);
+}
+
+nav {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+nav a {
+	text-decoration: none;
+	color: #19332d;
+	border: 1px solid #43685b;
+	border-radius: 999px;
+	padding: 0.46rem 0.8rem;
+	font-weight: 600;
+	background: rgba(255, 255, 255, 0.55);
+	transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+nav a:hover {
+	transform: translateY(-1px);
+}
+
+nav a.active {
+	background: #12453d;
+	color: #f5fff8;
+}
+
+.content-card {
+	border: 1px solid #6f8378;
+	border-radius: 16px;
+	background: rgba(253, 255, 249, 0.9);
+	padding: 1rem;
+	min-height: 56vh;
+	animation: fadeIn 0.55s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@media (max-width: 660px) {
+	.topbar {
+		align-items: start;
+		flex-direction: column;
+	}
+}
