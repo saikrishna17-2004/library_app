@@ -10,6 +10,7 @@ services:
 
   - type: web
     name: library-app-backend
+    plan: free
     env: python
     rootDir: .
     buildCommand: pip install -r backend/requirements.txt
