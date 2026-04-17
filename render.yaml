@@ -31,7 +31,7 @@ services:
           name: library-app-redis
           property: connectionString
 
-  - type: static_site
+  - type: static
     name: library-app-frontend
     rootDir: frontend
     buildCommand: |
