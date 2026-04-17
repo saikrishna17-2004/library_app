@@ -1,7 +1,3 @@
-databases:
-  - name: library-app-db
-    plan: free
-
 services:
   - type: redis
     name: library-app-redis
@@ -23,9 +19,7 @@ services:
       - key: ALLOWED_HOSTS
         value: "*"
       - key: DATABASE_URL
-        fromDatabase:
-          name: library-app-db
-          property: connectionString
+        sync: false
       - key: REDIS_URL
         fromService:
           type: redis
