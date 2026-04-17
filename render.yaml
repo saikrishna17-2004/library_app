@@ -1,0 +1,44 @@
+databases:
+  - name: library-app-db
+    plan: free
+
+services:
+  - type: redis
+    name: library-app-redis
+    plan: free
+    ipAllowList: []
+
+  - type: web
+    name: library-app-backend
+    env: python
+    rootDir: .
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python manage.py migrate && gunicorn backend.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DEBUG
+        value: "false"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "*"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: library-app-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: library-app-redis
+          property: connectionString
+
+  - type: static_site
+    name: library-app-frontend
+    rootDir: frontend
+    buildCommand: |
+      npm ci
+      node -e 'const fs=require("fs"); const apiBaseUrl=process.env.API_BASE_URL || "https://library-app-backend.onrender.com"; fs.writeFileSync("src/assets/runtime-config.js", "window.__APP_CONFIG__ = {\n  apiBaseUrl: " + JSON.stringify(apiBaseUrl) + "\n};\n");'
+      npm run build
+    staticPublishPath: dist/frontend/browser
+    envVars:
+      - key: API_BASE_URL
+        value: https://library-app-backend.onrender.com
